@@ -19,8 +19,7 @@ export default function Board() {
   };
 
   const changeCell = (x, y, value) => {
-    console.log(x);
-    console.log(y);
+    if (boardData[y][x] !== NO_PLAYER) return;
     let clonedBoardData = [...boardData];
     clonedBoardData[y][x] = value;
     setBoardData(clonedBoardData);
