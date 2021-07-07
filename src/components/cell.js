@@ -1,6 +1,6 @@
-export default function Cell({ value, onClick, key, x, y }) {
+export default function Cell({ value, onClick, x, y }) {
   return (
-    <span className="cell" onClick={onClick} key={key} x={x} y={y}>
+    <span className="cell" onClick={onClick} x={x} y={y}>
       {value}
     </span>
   );
