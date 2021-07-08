@@ -1,5 +1,4 @@
 export default function Cell({ cell, onClick }) {
-  console.log(cell.taken);
   return (
     <span
       className={`cell ${!cell.taken && "hidden"}`}
