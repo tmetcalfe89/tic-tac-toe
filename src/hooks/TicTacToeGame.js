@@ -18,77 +18,69 @@ class Cell {
   }
 }
 
-export default function useTicTacToeGame() {
-  const generateBlankBoard = () =>
-    new Array(3)
-      .fill()
-      .map((e, y) => new Array(3).fill().map((e, x) => new Cell(x, y)));
+class Board {
+  constructor(cells) {
+    this.cells =
+      cells ||
+      new Array(3)
+        .fill()
+        .map((e, y) => new Array(3).fill().map((e, x) => new Cell(x, y)));
+  }
 
-  const [boardData, setBoardData] = useState(generateBlankBoard());
-  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
-  const [winner, setWinner] = useState(NO_PLAYER);
+  getCell(x, y) {
+    return this.cells[y][x];
+  }
 
-  const changeCell = (x, y, value) => {
-    if (boardData[y][x].value !== NO_PLAYER) return;
-    let clonedBoardData = [...boardData];
-    clonedBoardData[y][x].value = value;
-    setBoardData(clonedBoardData);
-  };
+  getVal(x, y) {
+    return this.getCell(x, y).value;
+  }
 
-  const changePlayer = () => {
-    setCurrentPlayer(currentPlayer === PLAYER_1 ? PLAYER_2 : PLAYER_1);
-  };
+  setCell(x, y, value) {
+    this.getCell(x, y).value = value;
+    return this;
+  }
 
-  const takeTurn = (x, y) => {
-    if (winner !== NO_PLAYER) return;
-    changeCell(x, y, currentPlayer);
-    changePlayer();
-  };
-
-  const checkForWinner = () => {
+  get winner() {
     // Rows
     for (let y = 0; y < 3; y++) {
-      let winnerSearch = boardData[y][0].value;
+      let winnerSearch = this.getVal(0, y);
       for (let x = 1; x < 3; x++) {
-        if (boardData[y][x].value !== winnerSearch) {
+        if (this.getVal(x, y) !== winnerSearch) {
           winnerSearch = NO_PLAYER;
         }
       }
       if (winnerSearch !== NO_PLAYER) {
-        return setWinner(winnerSearch);
+        return winnerSearch;
       }
     }
     // Columns
     for (let x = 0; x < 3; x++) {
-      let winnerSearch = boardData[0][x].value;
+      let winnerSearch = this.getVal(x, 0);
       for (let y = 1; y < 3; y++) {
-        if (boardData[y][x].value !== winnerSearch) {
+        if (this.getVal(x, y) !== winnerSearch) {
           winnerSearch = NO_PLAYER;
         }
       }
       if (winnerSearch !== NO_PLAYER) {
-        return setWinner(winnerSearch);
+        return winnerSearch;
       }
     }
     // Diagonals
     if (
-      boardData[0][0].value === boardData[1][1].value &&
-      boardData[0][0].value === boardData[2][2].value
+      this.getVal(0, 0) === this.getVal(1, 1) &&
+      this.getVal(0, 0) === this.getVal(2, 2)
     ) {
-      return setWinner(boardData[0][0].value);
+      return this.getVal(0, 0);
     }
     if (
-      boardData[0][2].value === boardData[1][1].value &&
-      boardData[0][2].value === boardData[2][0].value
+      this.getVal(0, 2) === this.getVal(1, 1) &&
+      this.getVal(0, 2) === this.getVal(2, 0)
     ) {
-      return setWinner(boardData[0][2].value);
+      return this.getVal(0, 2);
     }
-    checkForTie();
-  };
-
-  const checkForTie = () => {
+    // Tie
     if (
-      boardData.reduce(
+      this.cells.reduce(
         (rowCount, row) =>
           row.reduce(
             (cellCount, cell) => (cell.taken ? cellCount + 1 : cellCount),
@@ -99,24 +91,48 @@ export default function useTicTacToeGame() {
         0
       ) === 3
     ) {
-      setWinner(TIE_PLAYER);
+      return TIE_PLAYER;
     }
+    return NO_PLAYER;
+  }
+}
+
+export default function useTicTacToeGame() {
+  const [board, setBoard] = useState(new Board());
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
+
+  const changeCell = (x, y, value) => {
+    if (board.getCell(x, y).taken) return;
+    setBoard(board.setCell(x, y, value));
+  };
+
+  const changePlayer = () => {
+    setCurrentPlayer(currentPlayer === PLAYER_1 ? PLAYER_2 : PLAYER_1);
+  };
+
+  const takeTurn = (x, y) => {
+    if (board.winner !== NO_PLAYER) return;
+    changeCell(x, y, currentPlayer);
+    changePlayer();
   };
 
   const resetGameState = () => {
-    setBoardData(generateBlankBoard());
+    setBoard(new Board());
     setCurrentPlayer(PLAYER_1);
     toast("Game reset");
   };
 
   useEffect(() => {
-    checkForWinner();
-  }, [boardData]);
+    console.log(board.winner);
+    if (board.winner === NO_PLAYER) return;
+    toast(`${board.winner} has won!`);
+  }, [board.winner]);
 
-  useEffect(() => {
-    if (winner === NO_PLAYER) return;
-    toast(`${winner} has won!`);
-  }, [winner]);
-
-  return { boardData, NO_PLAYER, takeTurn, winner, resetGameState };
+  return {
+    NO_PLAYER,
+    boardData: board.cells,
+    winner: board.winner,
+    takeTurn,
+    resetGameState,
+  };
 }
