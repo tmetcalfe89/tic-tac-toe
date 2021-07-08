@@ -1,12 +1,13 @@
-export default function Cell({ value, onClick, x, y, taken }) {
+export default function Cell({ cell, onClick }) {
+  console.log(cell.taken);
   return (
     <span
-      className={`cell ${!taken && "hidden"}`}
+      className={`cell ${!cell.taken && "hidden"}`}
       onClick={onClick}
-      x={x}
-      y={y}
+      x={cell.x}
+      y={cell.y}
     >
-      {value}
+      {cell.value}
     </span>
   );
 }

@@ -15,11 +15,8 @@ export default function Board() {
           <div className="row" key={`row-${rowI}`}>
             {row.map((cell, cellI) => (
               <Cell
-                value={cell}
+                cell={cell}
                 key={`cell-${rowI}-${cellI}`}
-                x={cellI}
-                y={rowI}
-                taken={cell !== NO_PLAYER}
                 onClick={(e) =>
                   takeTurn(
                     e.target.getAttribute("x"),

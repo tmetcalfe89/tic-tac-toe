@@ -6,19 +6,32 @@ const TIE_PLAYER = "Nobody";
 const PLAYER_1 = "X";
 const PLAYER_2 = "O";
 
+class Cell {
+  constructor(x, y) {
+    this.value = NO_PLAYER;
+    this.x = x;
+    this.y = y;
+  }
+
+  get taken() {
+    return this.value !== NO_PLAYER;
+  }
+}
+
 export default function useTicTacToeGame() {
-  const [boardData, setBoardData] = useState([
-    [NO_PLAYER, NO_PLAYER, NO_PLAYER],
-    [NO_PLAYER, NO_PLAYER, NO_PLAYER],
-    [NO_PLAYER, NO_PLAYER, NO_PLAYER],
-  ]);
+  const generateBlankBoard = () =>
+    new Array(3)
+      .fill()
+      .map((e, y) => new Array(3).fill().map((e, x) => new Cell(x, y)));
+
+  const [boardData, setBoardData] = useState(generateBlankBoard());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
   const [winner, setWinner] = useState(NO_PLAYER);
 
   const changeCell = (x, y, value) => {
-    if (boardData[y][x] !== NO_PLAYER) return;
+    if (boardData[y][x].value !== NO_PLAYER) return;
     let clonedBoardData = [...boardData];
-    clonedBoardData[y][x] = value;
+    clonedBoardData[y][x].value = value;
     setBoardData(clonedBoardData);
   };
 
@@ -35,9 +48,9 @@ export default function useTicTacToeGame() {
   const checkForWinner = () => {
     // Rows
     for (let y = 0; y < 3; y++) {
-      let winnerSearch = boardData[y][0];
+      let winnerSearch = boardData[y][0].value;
       for (let x = 1; x < 3; x++) {
-        if (boardData[y][x] !== winnerSearch) {
+        if (boardData[y][x].value !== winnerSearch) {
           winnerSearch = NO_PLAYER;
         }
       }
@@ -47,9 +60,9 @@ export default function useTicTacToeGame() {
     }
     // Columns
     for (let x = 0; x < 3; x++) {
-      let winnerSearch = boardData[0][x];
+      let winnerSearch = boardData[0][x].value;
       for (let y = 1; y < 3; y++) {
-        if (boardData[y][x] !== winnerSearch) {
+        if (boardData[y][x].value !== winnerSearch) {
           winnerSearch = NO_PLAYER;
         }
       }
@@ -59,16 +72,16 @@ export default function useTicTacToeGame() {
     }
     // Diagonals
     if (
-      boardData[0][0] === boardData[1][1] &&
-      boardData[0][0] === boardData[2][2]
+      boardData[0][0].value === boardData[1][1].value &&
+      boardData[0][0].value === boardData[2][2].value
     ) {
-      return setWinner(boardData[0][0]);
+      return setWinner(boardData[0][0].value);
     }
     if (
-      boardData[0][2] === boardData[1][1] &&
-      boardData[0][2] === boardData[2][0]
+      boardData[0][2].value === boardData[1][1].value &&
+      boardData[0][2].value === boardData[2][0].value
     ) {
-      return setWinner(boardData[0][2]);
+      return setWinner(boardData[0][2].value);
     }
     checkForTie();
   };
@@ -78,8 +91,7 @@ export default function useTicTacToeGame() {
       boardData.reduce(
         (rowCount, row) =>
           row.reduce(
-            (cellCount, cell) =>
-              cell !== NO_PLAYER ? cellCount + 1 : cellCount,
+            (cellCount, cell) => (cell.taken ? cellCount + 1 : cellCount),
             0
           ) === 3
             ? rowCount + 1
@@ -92,11 +104,7 @@ export default function useTicTacToeGame() {
   };
 
   const resetGameState = () => {
-    setBoardData([
-      [NO_PLAYER, NO_PLAYER, NO_PLAYER],
-      [NO_PLAYER, NO_PLAYER, NO_PLAYER],
-      [NO_PLAYER, NO_PLAYER, NO_PLAYER],
-    ]);
+    setBoardData(generateBlankBoard());
     setCurrentPlayer(PLAYER_1);
     toast("Game reset");
   };
