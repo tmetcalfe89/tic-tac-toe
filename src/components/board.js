@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cell from "./cell";
+import "./style.css";
 
 const NO_PLAYER = "-";
 const TIE_PLAYER = "Nobody";
@@ -104,7 +105,7 @@ export default function Board() {
   }, [winner]);
 
   return (
-    <div>
+    <div className="board">
       {boardData.map((row, rowI) => (
         <div className="row" key={`row-${rowI}`}>
           {row.map((cell, cellI) => (
