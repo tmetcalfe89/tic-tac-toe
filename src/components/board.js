@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useTicTacToeGame from "../context/TicTacToeGame";
+import useTicTacToeGame from "../hooks/TicTacToeGame";
 import Cell from "./Cell";
 import "./tictactoe.css";
 
