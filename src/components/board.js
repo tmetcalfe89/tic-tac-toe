@@ -124,6 +124,7 @@ export default function Board() {
                 key={`cell-${rowI}-${cellI}`}
                 x={cellI}
                 y={rowI}
+                taken={cell !== NO_PLAYER}
                 onClick={(e) =>
                   takeTurn(
                     e.target.getAttribute("x"),

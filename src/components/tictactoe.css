@@ -30,6 +30,10 @@
   user-select: none;
 }
 
+.cell.hidden {
+  color: transparent;
+}
+
 .reset {
   position: fixed;
   bottom: 1rem;
