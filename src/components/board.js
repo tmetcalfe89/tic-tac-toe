@@ -15,7 +15,7 @@ export default function Board() {
     [NO_PLAYER, NO_PLAYER, NO_PLAYER],
     [NO_PLAYER, NO_PLAYER, NO_PLAYER],
   ]);
-  const [currentPlayer, setCurrentPlayer] = useState(NO_PLAYER);
+  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
   const [winner, setWinner] = useState(NO_PLAYER);
 
   const changeCell = (x, y, value) => {
@@ -32,6 +32,7 @@ export default function Board() {
   const takeTurn = (x, y) => {
     if (winner !== NO_PLAYER) return;
     changeCell(x, y, currentPlayer);
+    changePlayer();
   };
 
   const checkForWinner = () => {
@@ -93,8 +94,17 @@ export default function Board() {
     }
   };
 
+  const resetGameState = () => {
+    setBoardData([
+      [NO_PLAYER, NO_PLAYER, NO_PLAYER],
+      [NO_PLAYER, NO_PLAYER, NO_PLAYER],
+      [NO_PLAYER, NO_PLAYER, NO_PLAYER],
+    ]);
+    setCurrentPlayer(PLAYER_1);
+    toast("Game reset");
+  };
+
   useEffect(() => {
-    changePlayer();
     checkForWinner();
   }, [boardData]);
 
@@ -104,24 +114,34 @@ export default function Board() {
   }, [winner]);
 
   return (
-    <div className="board">
-      {boardData.map((row, rowI) => (
-        <div className="row" key={`row-${rowI}`}>
-          {row.map((cell, cellI) => (
-            <Cell
-              value={cell}
-              key={`cell-${rowI}-${cellI}`}
-              x={cellI}
-              y={rowI}
-              onClick={(e) =>
-                takeTurn(e.target.getAttribute("x"), e.target.getAttribute("y"))
-              }
-            />
-          ))}
-        </div>
-      ))}
+    <>
+      <div className="board">
+        {boardData.map((row, rowI) => (
+          <div className="row" key={`row-${rowI}`}>
+            {row.map((cell, cellI) => (
+              <Cell
+                value={cell}
+                key={`cell-${rowI}-${cellI}`}
+                x={cellI}
+                y={rowI}
+                onClick={(e) =>
+                  takeTurn(
+                    e.target.getAttribute("x"),
+                    e.target.getAttribute("y")
+                  )
+                }
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+      {winner !== NO_PLAYER && (
+        <button className="reset" onClick={resetGameState}>
+          Reset
+        </button>
+      )}
       <ToastContainer
-        position="bottom-right"
+        position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -131,6 +151,6 @@ export default function Board() {
         draggable
         pauseOnHover
       />
-    </div>
+    </>
   );
 }
