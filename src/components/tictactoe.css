@@ -12,6 +12,7 @@
   display: inline-block;
   width: calc(min(70vh, 70vw));
   height: calc(min(70vh, 70vw));
+  padding: 5px;
 }
 
 .cell {
@@ -28,6 +29,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  background: white;
 }
 
 .cell.hidden {
