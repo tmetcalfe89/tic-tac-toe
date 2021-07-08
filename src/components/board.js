@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Cell from "./cell";
 
 const NO_PLAYER = "-";
+const TIE_PLAYER = "Nobody";
 const PLAYER_1 = "X";
 const PLAYER_2 = "O";
 
@@ -70,6 +71,25 @@ export default function Board() {
       boardData[0][2] === boardData[2][0]
     ) {
       return setWinner(boardData[0][2]);
+    }
+    checkForTie();
+  };
+
+  const checkForTie = () => {
+    if (
+      boardData.reduce(
+        (rowCount, row) =>
+          row.reduce(
+            (cellCount, cell) =>
+              cell !== NO_PLAYER ? cellCount + 1 : cellCount,
+            0
+          ) === 3
+            ? rowCount + 1
+            : rowCount,
+        0
+      ) === 3
+    ) {
+      setWinner(TIE_PLAYER);
     }
   };
 
