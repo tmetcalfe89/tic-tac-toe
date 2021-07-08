@@ -1,10 +1,14 @@
-import Board from "./components/board";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import TicTacToe from "./pages/TicTacToe";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <Board />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/tic-tac-toe" exact component={TicTacToe} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

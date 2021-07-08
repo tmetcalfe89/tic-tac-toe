@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Cell from "./cell";
-import "./style.css";
+import Cell from "./Cell";
+import "./tictactoe.css";
 
 const NO_PLAYER = "-";
 const TIE_PLAYER = "Nobody";
@@ -38,7 +38,6 @@ export default function Board() {
     // Rows
     for (let y = 0; y < 3; y++) {
       let winnerSearch = boardData[y][0];
-      console.log(winnerSearch);
       for (let x = 1; x < 3; x++) {
         if (boardData[y][x] !== winnerSearch) {
           winnerSearch = NO_PLAYER;

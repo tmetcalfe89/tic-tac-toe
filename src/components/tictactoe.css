@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap");
+
+.board,
+.cell {
+  border: 1px grey solid;
+  border-radius: 10px;
+}
+
+.board {
+  font-family: "Courier Prime", Courier, monospace;
+  background: darkgrey;
+  display: inline-block;
+  width: calc(min(70vh, 70vw));
+  height: calc(min(70vh, 70vw));
+}
+
+.cell {
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  font-size: calc(min(70vh / 3 - 12px, 70vw / 3 - 12px));
+  text-align: center;
+  width: calc(min(70vh / 3 - 12px, 70vw / 3 - 12px));
+  height: calc(min(70vh / 3 - 12px, 70vw / 3 - 12px));
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

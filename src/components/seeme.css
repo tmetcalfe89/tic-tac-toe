@@ -1,0 +1,8 @@
+.seeme {
+  position: absolute;
+  top: 1rem;
+}
+
+.seeme a {
+  color: blue;
+}
