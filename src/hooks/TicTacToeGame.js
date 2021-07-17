@@ -43,9 +43,7 @@ export default function useTicTacToeGame() {
   }, [board.winner]);
 
   return {
-    NO_PLAYER,
-    boardData: board.cells,
-    winner: board.winner,
+    board,
     takeTurn,
     resetGameState,
   };

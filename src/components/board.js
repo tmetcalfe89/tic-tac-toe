@@ -6,13 +6,12 @@ import Cell from "./Cell";
 import "./tictactoe.css";
 
 export default function Board() {
-  const { boardData, NO_PLAYER, takeTurn, winner, resetGameState } =
-    useTicTacToeGame();
+  const { board, takeTurn, resetGameState } = useTicTacToeGame();
 
   return (
     <>
       <div className="board">
-        {boardData.map((row, rowI) => (
+        {board.cells.map((row, rowI) => (
           <div className="row" key={`row-${rowI}`}>
             {row.map((cell, cellI) => (
               <Cell
@@ -29,7 +28,7 @@ export default function Board() {
           </div>
         ))}
       </div>
-      {winner !== NO_PLAYER && (
+      {board.gameOver && (
         <button className="reset" onClick={resetGameState}>
           Reset
         </button>

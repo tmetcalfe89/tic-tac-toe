@@ -87,6 +87,10 @@ function Board({ NO_PLAYER, TIE_PLAYER, PLAYER_1, PLAYER_2 }) {
       }
       return NO_PLAYER;
     }
+
+    get gameOver() {
+      return this.winner === PLAYER_1 || this.winner === PLAYER_2;
+    }
   };
 }
 
