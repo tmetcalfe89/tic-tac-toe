@@ -1,4 +1,11 @@
-function Board({ NO_PLAYER, TIE_PLAYER, PLAYER_1, PLAYER_2 }) {
+function Board({
+  NO_PLAYER,
+  TIE_PLAYER,
+  PLAYER_1,
+  PLAYER_2,
+  X_CELLS,
+  Y_CELLS,
+}) {
   class Cell {
     constructor(x, y) {
       this.value = NO_PLAYER;
@@ -12,12 +19,14 @@ function Board({ NO_PLAYER, TIE_PLAYER, PLAYER_1, PLAYER_2 }) {
   }
 
   return class Board {
-    constructor(PLAYERS, cells) {
+    constructor(cells) {
       this.cells =
         cells ||
-        new Array(3)
+        new Array(Y_CELLS)
           .fill()
-          .map((e, y) => new Array(3).fill().map((e, x) => new Cell(x, y)));
+          .map((e, y) =>
+            new Array(X_CELLS).fill().map((e, x) => new Cell(x, y))
+          );
     }
 
     getCell(x, y) {

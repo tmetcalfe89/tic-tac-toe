@@ -7,8 +7,17 @@ const NO_PLAYER = "-";
 const TIE_PLAYER = "Nobody";
 const PLAYER_1 = "X";
 const PLAYER_2 = "O";
+const X_CELLS = 3;
+const Y_CELLS = 3;
 
-const Board = board({ NO_PLAYER, TIE_PLAYER, PLAYER_1, PLAYER_2 });
+const Board = board({
+  NO_PLAYER,
+  TIE_PLAYER,
+  PLAYER_1,
+  PLAYER_2,
+  X_CELLS,
+  Y_CELLS,
+});
 
 export default function useTicTacToeGame() {
   const [board, setBoard] = useState(new Board());
