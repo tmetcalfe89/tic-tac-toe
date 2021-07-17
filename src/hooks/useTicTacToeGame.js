@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 
 import board from "../logic/Board";
 
@@ -19,7 +18,7 @@ const Board = board({
   Y_CELLS,
 });
 
-export default function useTicTacToeGame() {
+export default function useTicTacToeGame({ notify }) {
   const [board, setBoard] = useState(new Board());
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
 
@@ -43,12 +42,12 @@ export default function useTicTacToeGame() {
   const resetGameState = () => {
     setBoard(new Board());
     setCurrentPlayer(PLAYER_1);
-    toast("Game reset");
+    notify("Game reset");
   };
 
   useEffect(() => {
     if (board.winner === NO_PLAYER) return;
-    toast(`${board.winner} has won!`);
+    notify(`${board.winner} has won!`);
   }, [board.winner]);
 
   return {

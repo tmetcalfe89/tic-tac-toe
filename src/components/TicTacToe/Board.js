@@ -1,12 +1,13 @@
-import React from "react";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useTicTacToeGame from "../../hooks/useTicTacToeGame";
 import Cell from "./Cell";
 import "./Board.css";
 
 export default function Board() {
-  const { board, takeTurn, resetGameState } = useTicTacToeGame();
+  const { board, takeTurn, resetGameState } = useTicTacToeGame({
+    notify: toast,
+  });
 
   return (
     <>
