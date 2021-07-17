@@ -15,8 +15,9 @@ export default function useTicTacToeGame() {
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
 
   const changeCell = (x, y, value) => {
-    if (board.getCell(x, y).taken) return;
+    if (board.getCell(x, y).taken) return false;
     board.setCell(x, y, value);
+    return true;
   };
 
   const changePlayer = () => {
@@ -25,8 +26,9 @@ export default function useTicTacToeGame() {
 
   const takeTurn = (x, y) => {
     if (board.winner !== NO_PLAYER) return;
-    changeCell(x, y, currentPlayer);
-    changePlayer();
+    if (changeCell(x, y, currentPlayer)) {
+      changePlayer();
+    }
   };
 
   const resetGameState = () => {
@@ -36,7 +38,6 @@ export default function useTicTacToeGame() {
   };
 
   useEffect(() => {
-    console.log(board.winner);
     if (board.winner === NO_PLAYER) return;
     toast(`${board.winner} has won!`);
   }, [board.winner]);
