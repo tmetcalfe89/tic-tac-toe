@@ -1,9 +1,9 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useTicTacToeGame from "../hooks/TicTacToeGame";
+import useTicTacToeGame from "../../hooks/useTicTacToeGame";
 import Cell from "./Cell";
-import "./tictactoe.css";
+import "./Board.css";
 
 export default function Board() {
   const { board, takeTurn, resetGameState } = useTicTacToeGame();

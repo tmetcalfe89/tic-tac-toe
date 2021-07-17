@@ -1,4 +1,4 @@
-import "./seeme.css";
+import "./SeeMe.css";
 
 const host = window.location.host;
 
