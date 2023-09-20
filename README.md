@@ -1,9 +1,5 @@
 # React Tic-Tac-Toe
 
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
-[![Issues](https://img.shields.io/github/issues-raw/tmetcalfe89/tic-tac-toe.svg?maxAge=25000)](https://github.com/tmetcalfe89/tic-tac-toe/issues)
-[![Dependecy Status](https://david-dm.org/tmetcalfe89/tic-tac-toe.svg)](https://david-dm.org/tmetcalfe89/tic-tac-toe)
-
 ## What is this?
 
 It's a Tic-Tac-Toe game, made using React. A couple bells and whistles, including a toast to indicate the winner, and a little component to tell you to come back to this page if you want to know more.
