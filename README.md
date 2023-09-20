@@ -13,3 +13,7 @@ Whether you're new to React or not, I challenge you to make a better version tha
 ## How can I play?
 
 Navigate to https://tmetcalfe89.github.io/tic-tac-toe/ and play with a friend right on your device. Yes, both players need to use the same device; there is no network functionality on this.
+
+# Tip Jar
+
+If this helped, please consider dropping a tip at https://ko-fi.com/lazyriverprogramming
