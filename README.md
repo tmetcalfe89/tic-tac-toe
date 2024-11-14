@@ -1,8 +1,14 @@
-# React + Vite
+# Tic Tac Toe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**4/100 of my App-A-Day challenge**
 
-Currently, two official plugins are available:
+[Check it out live here.](https://tic-tac-toe.timinc.us/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What
+
+A front-end implementation of the Tic Tac Toe game for play between two players on the same device. For the App-A-Day challenge, I tuned up the styling, adding a theme for both light and dark mode users which automatically switches based on your system preferences.
+
+## How
+
+* Uses React for the JS/HTML/CSS combo.
+* Uses [React Toastify](https://www.npmjs.com/package/react-toastify) to make the :yum: toast.
