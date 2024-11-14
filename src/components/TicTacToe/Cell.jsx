@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 export default function Cell({ cell, onClick }) {
   return (
@@ -12,3 +12,13 @@ export default function Cell({ cell, onClick }) {
     </span>
   );
 }
+
+Cell.propTypes = {
+  cell: PropTypes.shape({
+    taken: PropTypes.bool,
+    x: PropTypes.number,
+    y: PropTypes.number,
+    value: PropTypes.string,
+  }),
+  onClick: PropTypes.func,
+};

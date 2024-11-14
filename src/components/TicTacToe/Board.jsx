@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useTicTacToeGame from "../../hooks/useTicTacToeGame";
 import Cell from "./Cell";
@@ -31,10 +31,9 @@ export default function Board() {
       </div>
       {board.gameOver && (
         <button className="reset" onClick={resetGameState}>
-          Reset
+          New Game
         </button>
       )}
-      <ToastContainer position="bottom-center" />
     </>
   );
 }

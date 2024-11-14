@@ -1,11 +1,4 @@
-function Board({
-  NO_PLAYER,
-  TIE_PLAYER,
-  PLAYER_1,
-  PLAYER_2,
-  X_CELLS,
-  Y_CELLS,
-}) {
+function Board({ NO_PLAYER, TIE_PLAYER, X_CELLS, Y_CELLS }) {
   class Cell {
     constructor(x, y) {
       this.value = NO_PLAYER;
@@ -98,7 +91,7 @@ function Board({
     }
 
     get gameOver() {
-      return this.winner === PLAYER_1 || this.winner === PLAYER_2;
+      return this.winner != NO_PLAYER;
     }
   };
 }

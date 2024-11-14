@@ -42,13 +42,12 @@ export default function useTicTacToeGame({ notify }) {
   const resetGameState = () => {
     setBoard(new Board());
     setCurrentPlayer(PLAYER_1);
-    notify("Game reset");
   };
 
   useEffect(() => {
     if (board.winner === NO_PLAYER) return;
     notify(`${board.winner} has won!`);
-  }, [board.winner]);
+  }, [board.winner, notify]);
 
   return {
     board,

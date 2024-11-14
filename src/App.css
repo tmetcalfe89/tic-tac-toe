@@ -1,3 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap");
+
+:root {
+  --fore: #1a1a19;
+  --accent: #31511e;
+  --mid: #859f3d;
+  --bg: #f6fcdf;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a19;
+    --mid: #859f3d;
+    --accent: #31511e;
+    --fore: #f6fcdf;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--fore);
+}
+
 #root {
   width: 100vw;
   height: 100vh;
@@ -5,4 +28,85 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.reset {
+  position: fixed;
+  bottom: 1rem;
+  background: var(--accent);
+  color: var(--fore);
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+[role="button"] {
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+[role="button"]:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  border-radius: 5px;
+  border: none;
+  min-width: 35vw;
+  max-width: 30rem;
+  padding: 0;
+  background-color: var(--bg);
+  border: 1px solid var(--accent);
+  color: var(--fore);
+}
+
+dialog .main:not(:last-child),
+dialog .header:not(:last-child) {
+  border-bottom: 1px solid var(--accent);
+}
+
+dialog .header h1 {
+  font-weight: bold;
+  font-size: x-large;
+  margin: 0;
+}
+
+dialog > * {
+  padding: 1.5rem;
+}
+
+dialog .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+dialog .header button {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  font-size: 1.5em;
+  color: var(--fore);
+}
+
+dialog .footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+a {
+  color: var(--accent);
 }

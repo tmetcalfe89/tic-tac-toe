@@ -1,8 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap");
-
 .board {
   font-family: "Courier Prime", Courier, monospace;
-  background: darkgrey;
+  background: var(--mid);
   display: inline-block;
   width: calc(min(70vh, 70vw));
   height: calc(min(70vh, 70vw));
@@ -25,20 +23,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background: white;
+  background: var(--bg);
+  color: var(--fore);
 }
 
 .cell.hidden {
   color: transparent;
-}
-
-.reset {
-  position: fixed;
-  bottom: 1rem;
-  background: blue;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 1rem;
-  cursor: pointer;
 }
